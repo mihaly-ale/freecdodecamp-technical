@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- the project has his flaws as it is done without JS, hence some interactivity is sluggish 
+The purpose of the project was doing if for fcc RWD, therefore it was intended to do without JS-->
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The basic concepts Of Flexbox | </title>
+        <link rel="stylesheet" href="styles.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    </head>
+
+    <body>    
+
+            <nav class="navbar" id="navbar">
+
+                <div class="header-wrapper">
+                    <header class="main-header">
+                        <h1>The basic concepts of Flexbox</h1>
+                    </header>
+                </div>
+
+                <!-- hamburger menu start -->
+                <input class="nav-toggle" type="checkbox" id="nav-toggle">
+                <label class='nav-toggle-label ' for="nav-toggle">
+                    <span class="nav-toggle-icon material-symbols-outlined">menu</span>
+                </label>
+                <!-- hamburger menu end -->
+            
+                <div class="nav-menu">
+                    <div class="nav-link-group">
+                        <a class="nav-link" href='#the_two_axes_of_flexbox'>The two axes of flexbox</a>
+                       <!-- submenu start -->
+                        <input class="drop-links-toggle" type="checkbox"  id="drop-links-toggle-first">
+                        <label class="drop-links-toggle-label" for="drop-links-toggle-first">
+                                <span class="droplinks-toggle-icon material-symbols-outlined">unfold_more</span>
+                        </label>
+                        <ul class="drop-links">
+                            <li class="drop-link"><a href="#main-ax">the main axes</a></li>
+                            <li class="drop-link"><a href="#cross-ax">the cross axis</a></li>
+                        </ul>
+                        <!-- submenu end  -->
+                    </div>
+
+                    <div class="nav-link-group">
+                        <a class="nav-link" href="#start_and_end_lines">Start and end lines</a>
+                    </div>
+
+                    <div class="nav-link-group">
+                        <a class="nav-link" href="#the_flex_container">The flex container</a>
+                        <!-- submenu start -->
+                        <input class="drop-links-toggle" type="checkbox" id="drop-links-toggle-second">
+                        <label class="drop-links-toggle-label" for="drop-links-toggle-second">
+                            <span class="droplinks-toggle-icon material-symbols-outlined">unfold_more</span>
+                        </label>
+                        <ul class='drop-links'>
+                            <li class="drop-link"><a href="#flex-dir">Changing flex direction</a></li>
+                        </ul>
+                        <!-- submenu end -->
+                    </div>
+
+                    <div class="nav-link-group">
+                        <a class="nav-link" href="#the_flex-wrap_property">The flex-wrap property</a>
+                    </div>
+
+                    <div class="nav-link-group">
+                        <a class="nav-link" href="#the_flex-flow_shorthand">The flex-flow shorthand</a>
+                    </div>
+
+                    <div class="nav-link-group">
+                        <a class="nav-link" href="#properties_applied_to_flex_items">Properties applied to flex items</a>
+                         <!-- submenu start -->
+                        <input class="drop-links-toggle" type="checkbox" id="drop-links-toggle-third">
+                        <label class="drop-links-toggle-label" for="drop-links-toggle-third">
+                            <span class="droplinks-toggle-icon material-symbols-outlined">unfold_more</span>
+                        </label>
+                        <ul class='drop-links'>
+                            <li class="drop-link"><a href="#flex-basis">The flex-basis property</a></li>
+                            <li class="drop-link"><a href="#flex-grow">The flex-grow property </a></li>
+                            <li class="drop-link"> <a href="#flex-shrink">The flex-shrink property</a></li>
+                            <li class="drop-link"><a href="#flex-shorthand">Shorthand values for the flex properties</a></li>
+                        </ul>
+                         <!-- submenu end  -->
+                    </div>
+
+                    <div class="nav-link-group">
+                        <a class="nav-link" href="#managing_free_space_between_flex_items">Managing free space between flex items</a>
+                        <!-- submenu start -->
+                        <input class="drop-links-toggle" type="checkbox" id="drop-links-toggle-fourth">
+                        <label class="drop-links-toggle-label" for="drop-links-toggle-fourth">
+                            <span class="droplinks-toggle-icon material-symbols-outlined">unfold_more</span>
+                        </label>
+                        <ul class="drop-links">
+                            <li class="drop-link"><a href="#align-items">align-items </a></li>
+                            <li class="drop-link"> <a href="#justify-content">justify-content </a></li>
+                            <li class="drop-link"> <a href="#justify-items">justify-items </a></li>
+                        </ul>
+                        <!-- submenu end -->
+                    </div>
+                    <!-- last nav-link end -->
+                </div>
+                <!-- nav-menu end -->
+            </nav>
+             <!-- side-nav end -->
+            
+            <div class="main-wrapper">
+                <!-- to work with scroll-padding, that needed to prevent headbutting -cs:42 -->
+                <main id="main-doc">
+                    <div class="intro">
+                        <p>The Flexible Box Module, usually referred to as flexbox, was designed as a one-dimensional layout
+                        model, and as a method that could offer space distribution between items in an interface and
+                        powerful alignment capabilities. This article gives an outline of the main features of flexbox,
+                        which we will be exploring in more detail in the rest of these guides.</p>
+                        <p>When we describe flexbox as being one dimensional we are describing the fact that flexbox deals
+                        with layout in one dimension at a time — either as a row or as a column. This can be contrasted
+                        with the two-dimensional model of <a target='_blank' href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout">CSS Grid Layout</a>, which controls columns and rows together.</p>
+                    </div>
+
+                    <section class="main-section" id="the_two_axes_of_flexbox">
+                        <header class="h2">The two axes of flexbox</header>
+                            <p>When working with flexbox you need to think in terms of two axes — the main axis and the cross axis.
+                            The main axis is defined by the <a target='_blank' href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction"><code>flex-direction</code></a> property, and the cross axis runs perpendicular to
+                            it. Everything we do with flexbox refers back to these axes, so it is worth understanding how they
+                            work from the outset.</p>
+                        <h3 id="main-ax">The main axis</h3>
+                            <p>The main axis is defined by <code>flex-direction</code>, which has four possible values:</p>
+                            <ul>
+                                <li><code>row</code></li>
+                                <li><code>row-reverse</code></li>
+                                <li><code>column</code></li>
+                                <li><code>column-reverse</code></li>
+                            </ul>
+                            <p>Should you choose <code>row</code> or <code>row-reverse</code>, your main axis will run along the row in the <strong>inline direction</strong>.</p>
+                        <h3 id="cross-ax">The cross axis</h3>
+                            <p>The cross axis runs perpendicular to the main axis, therefore if your <code>flex-direction</code> (main axis) is
+                            set to <code>row</code> or <code>row-reverse</code> the cross axis runs down the columns.</p>
+                    </section>
+            
+                    <section class="main-section" id="start_and_end_lines">
+                        <header class="h2">Start and end lines</header>
+                            <p>Another vital area of understanding is how flexbox makes no assumption about the writing mode of the
+                            document. In the past, CSS was heavily weighted towards horizontal and left-to-right writing modes.
+                            Modern layout methods encompass the range of writing modes and so we no longer assume that a line of
+                            text will start at the top left of a document and run towards the right-hand side, with new lines
+                            appearing one under the other.</p>
+                            <p>If the <code>flex-direction</code> is <code>row</code> and I am working in English, then the start edge of the main axis will
+                            be on the left, the end edge on the right.</p>
+                            <p> If I were to work in Arabic, then the start edge of my main axis would be on the right and the end
+                            edge on the left. </p>
+                    </section>
+
+                    <section class="main-section" id="the_flex_container">
+                        <header class="h2">The flex container</header>
+                            <p>An area of a document laid out using flexbox is called a flex <strong>container</strong>. To create a flex container,
+                            we set the value of the area's container's <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/display"><code>display</code></a> property to <code>flex</code> or <code>inline-flex</code>. As soon as we do
+                            this the direct children of that container become <strong>flex items</strong>. As with all properties in CSS, some
+                            initial values are defined, so when creating a flex container all of the contained flex items will
+                            behave in the following way.</p>
+                            <ul>
+                                <li>Items display in a row (the <code>flex-direction</code> property's default is <code>row</code>).</li>
+                                <li>The items start from the start edge of the main axis.</li>
+                                <li>The items do not stretch on the main dimension, but can shrink.</li>
+                                <li>The items will stretch to fill the size of the cross axis.</li>
+                                <li>The <a target='_blank' href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis">flex-basis</a> property is set to <code>auto</code>.</li>
+                                <li>The <a target='_blank' href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap">flex-wrap</a> property is set to <code>nowrap</code>.</li>
+                            </ul>
+                            <p>The result of this is that your items will all line up in a row, using the size of the content as their
+                            size in the main axis. If there are more items than can fit in the container, they will not wrap but
+                            will instead overflow. If some items are taller than others, all items will stretch along the cross axis
+                            to fill its full size.</p>
+                            <p>You can see in the live example below how this looks. Try editing the items or adding additional items in order to test
+                            the initial behavior of flexbox.</p>
+                            <iframe src="https://mdn.github.io/css-examples/flexbox/basics/the-flex-container.html" loading="lazy" height="480"></iframe>
+                        <h3 id="flex-dir">Changing flex-direction</h3>
+                            <p>Adding the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction"><code>flex-direction</code></a> property to the flex container allows us to change the direction in which
+                            our flex items display. Setting <code>flex-direction: row-reverse</code> will keep the items displaying along the
+                            row, however the start and end lines are switched.</p>
+                            <p>If we change <code>flex-direction</code> to <code>column</code> the main axis switches and our items now display in a column.
+                            Set <code>column-reverse</code> and the start and end lines are again switched.</p>
+                    </section>
+
+                    <section class="main-section" id="the_flex-wrap_property">
+                        <header class="h2">The flex-wrap property</header>
+                            <p>While flexbox is a one dimensional model, it is possible to cause our flex items to wrap onto
+                            multiple lines. In doing so, you should consider each line as a new flex container. Any space
+                            distribution will happen across that line, without reference to the lines on either side.</p>
+                            too large to all display in one line, they will wrap onto another line. The live sample below
+                            contains items that have been given a width, the total width of the items being too wide for the
+                            flex container. As <code>flex-wrap</code> is set to <code>wrap</code>, the items wrap. Set it to <code>nowrap</code>, which is also the
+                            initial value, and they will instead shrink to fit the container because they are using initial
+                            flexbox values that allows items to shrink. Using <code>nowrap</code> would cause an overflow if the items were
+                            not able to shrink, or could not shrink small enough to fit.</p>
+                            <iframe src="https://mdn.github.io/css-examples/flexbox/basics/flex-wrap.html" loading="lazy" height="400"></iframe>
+                            <p>Find out more about wrapping flex items in the guide <a target='_blank' href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Mastering_Wrapping_of_Flex_Items">Mastering Wrapping of Flex Items</a>.</p>
+                    </section>
+
+                    <section class="main-section" id="the_flex-flow_shorthand">
+                        <header class="h2">The flex-flow shorthand</header>
+                            <p>You can combine the two properties <code>flex-direction</code> and <code>flex-wrap</code> into the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-flow"><code>flex-flow</code></a> shorthand. The first
+                            value specified is <code>flex-direction</code> and the second value is <code>flex-wrap</code>.</p>
+                            <iframe src="https://mdn.github.io/css-examples/flexbox/basics/flex-flow.html" loading="lazy" height="400"></iframe>
+                    </section>
+
+                    <section class="main-section" id="properties_applied_to_flex_items">
+                        <header class="h2">Properties applied to flex items</header>
+                            <p>To have more control over flex items we can target them directly. We do this by way of three properties:</p>
+                            <ul>
+                                <li><a target='_blank' href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow"><code>flex-grow</code></a></li>
+                                <li><a target='_blank' href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink"><code>flex-shrink</code></a></li>
+                                <li><a target='_blank' href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis"><code>flex-basis</code></a></li>
+                            </ul>
+                            <p>We will take a brief look at these properties in this overview, and you can gain a fuller understanding in the guide
+                             <a target='_blank'
+                                href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Controlling_Ratios_of_Flex_Items_Along_the_Main_Ax">Controlling Ratios
+                                of Flex Items on the Main Axis</a>.</p>
+                                <img src="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox/basics7.png"
+                                alt="This flex container has available space after laying out the items.">
+                            <p>Before we can make sense of these properties we need to consider the concept of <strong>available space</strong>. What
+                            we are doing when we change the value of these flex properties is to change the way that available
+                            space is distributed amongst our items. This concept of available space is also important when we
+                            come to look at aligning items.</p>
+                            <p>If we have three 100 pixel-wide items in a container which is 500 pixels wide, then the space we need
+                            to lay out our items is 300 pixels. This leaves 200 pixels of available space. If we don't change
+                            the initial values then flexbox will put that space after the last item.</p>
+                            <p>If we instead would like the items to grow and fill the space, then we need to have a method of
+                            distributing the leftover space between the items. This is what the <code>flex</code> properties that we apply to
+                            the items themselves, will do.</p>
+                        <h3 id="flex-basis">The <code>flex-basis</code> property</h3>
+                            <p>The flex-basis is what defines the size of that item in terms of the space it leaves as available
+                            space. The initial value of this property is <code>auto</code> — in this case the browser looks to see if the
+                            items have a size. In the example above, all of the items have a width of 100 pixels and so this is
+                            used as the <code>flex-basis</code>.</p>
+                            <p>If the items don't have a size then the content's size is used as the flex-basis. This is why when we
+                            just declare <code>display: flex</code> on the parent to create flex items, the items all move into a row and
+                            take only as much space as they need to display their contents,</p>
+                        <h3 id="flex-grow">The flex-grow property</h3>
+                            <p>With the <code>flex-grow</code> property set to a positive integer, flex items can grow along the main axis from
+                            their <code>flex-basis</code>. This will cause the item to stretch and take up any available space on that axis,
+                            or a proportion of the available space if other items are allowed to grow too.</p>
+                            <p>If we gave all of our items in the example above a <code>flex-grow</code> value of 1 then the available space in
+                            the flex container would be equally shared between our items and they would stretch to fill the
+                            container on the main axis.</p>
+                            <p>The flex-grow property can be used to distribute space in proportion. If we give our first item a
+                            <code>flex-grow</code> value of 2, and the other items a value of 1 each, 2 parts of the available space will be
+                            given to the first item (100px out of 200px in the case of the example above), 1 part each the other
+                            two (50px each out of the 200px total).</p>
+                        <h3 id="flex-shrink">The flex-shrink property</h3>
+                            <p>Where the <code>flex-grow</code> property deals with adding space in the main axis, the <code>flex-shrink</code> property
+                            controls how it is taken away. If we do not have enough space in the container to lay out our items,
+                            and flex-shrink is set to a positive integer, then the item can become smaller than the <code>flex-basis</code>.
+                            As with <code>flex-grow</code>, different values can be assigned in order to cause one item to shrink faster than
+                            others — an item with a higher value set for <code>flex-shrink</code> will shrink faster than its siblings that
+                            have lower values.</p>
+                            <p>The minimum size of the item will be taken into account while working out the actual amount of
+                            shrinkage that will happen, which means that flex-shrink has the potential to appear less consistent
+                            than flex-grow in behavior. We'll therefore take a more detailed look at how this algorithm works in
+                            the article <a target='_blank' href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Controlling_Ratios_of_Flex_Items_Along_the_Main_Ax">Controlling Ratios of items along the main axis</a>.</p>
+                        <h3 id="flex-shorthand">Shorthand values for the flex properties</h3>
+                            <p>You will very rarely see the <code>flex-grow</code>, <code>flex-shrink</code>, and <code>flex-basis</code> properties used individually;
+                            instead they are combined into the <a target='_blank' href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex">flex</a> shorthand. The flex shorthand allows you to set the three
+                            values in this order — <code>flex-grow</code>, <code>flex-shrink</code>, <code>flex-basis.</code></p>
+                            <p>There are also some predefined shorthand values which cover most of the use cases. You will often see
+                            these used in tutorials, and in many cases these are all you will need to use. The predefined values
+                            are as follows:</p>
+                            <ul>
+                                <li><code>flex: initial</code></li>
+                                <li><code>flex: auto</code></li>
+                                <li><code>flex: none</code></li>
+                                <li><code>flex: &#10092; positive-number &#10093;</code></li>
+                            </ul>
+                            <p>Setting <code>flex: initial</code> resets the item to the initial values of Flexbox. This is the same as <code> flex: 0 1 auto </code>. In this case the value of <code>flex-grow</code> is 0, so items will not grow larger than their <code>flex-basis</code>
+                            size. The value of <code>flex-shrink</code> is 1, so items can shrink if they need to rather than overflowing.
+                            The value of <code>flex-basis</code> is <code>auto</code>. Items will either use any size set on the item in the main
+                            dimension, or they will get their size from the content size.</p>
+                            <p>Using flex: auto is the same as using <code>flex: 1 1 auto</code>; everything is as with <code>flex:initial</code> but in this
+                            case the items can grow and fill the container as well as shrink if required.</p>
+                            <p>Using <code>flex: none</code> will create fully inflexible flex items. It is as if you wrote <code>flex: 0 0 auto</code>. The
+                            items cannot grow or shrink but will be laid out using flexbox with a <code>flex-basis</code> of <code>auto</code>.</p>
+                            <p>The shorthand you often see in tutorials is <code>flex: 1</code> or <code>flex: 2</code> and so on. This is as if you used
+                            <code>flex: 1 1 0</code> or <code>flex: 2 1 0</code> and so on, respectively. The items can grow and shrink from a <code>flex-basis</code>
+                            of 0.</p>
+                            <p>Try these shorthand values in the live example below.</p>
+                            <iframe src="https://mdn.github.io/css-examples/flexbox/basics/flex-properties.html" loading="lazy" height="510"></iframe>
+                    </section>
+
+                    <section class="main-section" id="managing_free_space_between_flex_items">
+                        <header class="h2">Managing free space between flex items</header>
+                            <p>A key feature of flexbox is the ability to align and justify items on the main- and cross-axes, and to
+                                distribute space between flex items. Note that these properties are to be set on the flex container, not
+                                on the items themselves.
+                            </p>
+                        <h3 id="align-items">align-items</h3>
+                            <p>The <a target='_blank' href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items"><code>align-items</code></a> property will align the items on the cross axis.</p>
+                            <p>The initial value for this property is <code>stretch</code> and this is why flex items stretch to the height of
+                            the flex container by default. This might be dictated by the height of the tallest item in the
+                            container, or by a size set on the flex container itself.</p>
+                            <p>You could instead set <code>align-items</code> to <code>flex-start</code> in order to make the items line up at the start of
+                            the flex container, <code>flex-end</code> to align them to the end, or <code>center</code> to align them in the center. Try
+                            this in the live example — I have given the flex container a height in order that you can see how
+                            the items can be moved around inside the container. See what happens if you set the value of
+                            align-items to:</p>
+                            <ul>
+                                <li><code>stretch</code></li>
+                                <li><code>flex-start</code></li>
+                                <li><code>flex-end</code></li>
+                                <li><code>center</code></li>
+                            </ul>
+                            <iframe src="https://mdn.github.io/css-examples/flexbox/basics/align-items.html" loading="lazy" height="520"></iframe>
+                        <h3 id="justify-content">justify-content</h3>
+                            <p>The <a target='_blank' href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content"><code>justify-content</code></a> property is used to align the items on the main axis, the direction in which
+                            <code>flex-direction</code> has set the flow. The initial value is <code>flex-start</code> which will line the items up at the
+                            start edge of the container, but you could also set the value to <code>flex-end</code> to line them up at the
+                            end, or <code>center</code> to line them up in the center.</p>
+                            <p>You can also use the value <code>space-between</code> to take all the spare space after the items have been laid
+                            out, and share it out evenly between the items so there will be an equal amount of space between
+                            each item. To cause an equal amount of space on the right and left of each item use the value
+                            <code>space-around</code>. With <code>space-around</code>, items have a half-size space on either end. Or, to cause items to
+                            have equal space around them use the value <code>space-evenly</code>. With <code>space-evenly</code>, items have a full-size
+                            space on either end.</p>
+                            <ul>
+                                <li><code>flex-start</code></li>
+                                <li><code>flex-end</code></li>
+                                <li><code>center</code></li>
+                                <li><code>space-around</code></li>
+                                <li><code>space-between</code></li>
+                                <li><code>space-evenly</code></li>
+                            </ul>
+                            <p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container">In the article Aligning Items in a Flex Container</a> we will explore these properties in more depth, in
+                            order to have a better understanding of how they work. These simple examples however will be useful
+                            in the majority of use cases.</p>
+                            <iframe src="https://mdn.github.io/css-examples/flexbox/basics/justify-content.html" loading="lazy" height="380"></iframe>
+                        <h3 id="justify-items">justify-items</h3>
+                            <p>The <a target='_blank'
+                                href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items"><code>justify-items</code></a> property is ignored in flexbox layouts.</p>
+                    </section>
+                </main>
+            </div>
+            <!-- main-wrapper end -->
+        
+
+        <footer>
+            <p>All the content is taken from the <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox">Basic concepts of flexbox</a> guide from the <dfn title="Mozilla Developer Network">MDN</dfn> website.</p> <br>
+                   
+            <div>
+                <p class="copyright">
+                     This is a technical documentation page made for the course of Responsive Web Design by <a class="fcc-link"
+                            href="https://www.freecodecamp.org/" target="_blank">freeCodeCamp</a> <br>
+                    &copy; <a target="_blank" href="https://www.linkedin.com/in/mihalyale"> Mihaly Ale</a>
+                </p>
+            </div>
+        </footer>
+    </body>
+</html>
+

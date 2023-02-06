@@ -1,0 +1,395 @@
+/* reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+
+    font-size: 62.5%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.4;
+    font-weight: 300;
+    
+
+    --font-xlg: 3rem;
+    --font-lg: 2.5rem;
+
+    --font-md: 2rem;
+
+    --font-small: 1.6rem;
+    --font-xs: 1.4rem;
+}
+
+
+/* =============== */
+/* = PAGE LAYOUT = */
+
+
+/*
+ https://css-tricks.com/fixed-headers-on-page-links-and-overlapping-content-oh-my/ 
+
+!!! - to prevent "headbutting the browser window' - !!!
+*/ 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+.main-wrapper {
+    margin-top: 120px;
+    margin-bottom: 80px;
+}
+
+body {
+    width: 100vw;
+}
+
+.header-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    border-bottom: 1px solid rgb(212, 212, 212);
+}
+
+.main-header {
+    margin-left: 80px;
+    letter-spacing: 1px;
+    word-spacing: 1px;    
+}
+
+h1 {
+    font-size: var(--font-lg);
+    font-weight: 900;
+}
+
+main {
+    background-color: rgb(125, 125, 200 / .85);
+    width: 90%;
+    margin-inline: auto;
+    font-size: var(--font-small);
+}
+
+footer{
+    font-size: var(--font-xs);
+    margin: 2em 1em 2em 1em;
+}
+
+code {
+    font-size: var(--font-xs);
+    vertical-align: middle;
+    background: #f2f1f1;
+    padding: .125rem .25rem;
+    border-radius: 2px;
+}
+
+section {
+    margin-bottom: 2em;
+}
+
+section .h2 {
+    font-size: var(--font-md);
+    font-weight: 700;
+    margin-top:1em;
+    margin-bottom: .5em;
+}
+
+section h3 {
+    font-size: var(--font-small);
+    margin-top:1em;
+    margin-bottom: .5em;
+    font-weight: 500;
+}
+
+main p {
+    margin-bottom: .5em;
+}
+
+main ul {
+    margin-block: .5em;
+}
+
+main li {
+    list-style-type: circle;
+    list-style-position: inside;
+    margin-left: 1em;
+    text-indent: -1em;
+}
+
+img{
+    max-width:100%;
+    height:auto;
+}
+
+iframe {
+    width: 100%;
+    border: 1px solid rgb(212, 212, 212);
+    border-radius: 3px;
+    margin-block: 1em;
+}
+
+
+/* ============================= */
+/* = NAV_TOGGLE (hamburger menu toggle) = */
+
+/* hides checkbox box */
+.nav-toggle {
+    display: none;
+    margin: 0;
+}
+
+.nav-toggle-label {
+    position: fixed;
+    top: 14px;
+    left: 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: .25em;
+    box-shadow: 0.5px 0.5px 1px 1px rgb(212, 212, 212);
+    background-color: white;
+    color:black;
+    cursor: pointer;
+}
+
+.nav-toggle-icon.material-symbols-outlined  { 
+    font-size: 36px;    
+}
+
+.nav-toggle-label:hover {
+    background-color: black;
+    color: white;
+}
+
+/* animation */
+/*no JS - idea: Kevin Powell - Create a responsive navigation nav with no JS! */
+/* closes down nav along y axis */
+.nav-menu {
+    position: absolute;
+    /* taken out from the document, as without position:absolute it made links under itself unclickable */
+    width:80vw; 
+    margin: 0;
+    transform: scale(1, 0);
+    transition: transform 400ms ease-in-out;
+    transform-origin: top;
+    background-color: black;
+}
+
+/* 
+.nav-toggle = checkbox
+~ : selects the nav element that is preceded by a nav-toggle
+when nav-toggle checked will do a transform scale on nav
+scale(1, 0) => scale(1, 1) aka increase y (top-bottom) to "show"-state
+*/
+.nav-toggle:checked~.nav-menu {
+    transform: scale(1, 1);
+}
+
+.nav-menu a {
+    font-size: var(--font-small);
+    /* display: block;     */
+    background-color: black;
+    color: white;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+    /* opacity transition to 0 - aka hide menu - speed up */
+}
+
+.nav-toggle:checked~.nav-menu a {
+    opacity: 1;
+    transition: opacity 250ms ease-in-out 200ms;
+    /* do opacity transition to 1 - aka show menu - in 250ms  when nav-toggle checked with 250ms delay  */
+}
+
+.nav-menu a:hover {
+    background-color: white;
+    color: black;
+}
+
+/* sets color for drop-links-toggle-icon */
+.nav-menu a:hover~label{
+    color:black;
+}
+
+
+/* DROP-LINKS-TOGGLE (submenu-toggle) */
+/* the hack to explain */
+
+/* hides checkbox box */
+.drop-links-toggle{
+    display:none;
+}
+
+.drop-links-toggle-label {
+    /* nav-link-group:relative as anchor point for position */
+    position: absolute;    
+    right: 0px; 
+    top:6px;
+    color: white;
+    padding: .85em;
+    cursor: pointer;
+}
+
+.drop-links .drop-link{     
+    position: absolute;   
+    transform: scale(1, 0);    
+    transition: transform 100ms ease-in-out;
+    transform-origin: top;    
+}
+
+.drop-links-toggle:checked~.drop-links .drop-link{
+    position: relative;
+    transform: scale(1, 1);
+    transform-origin: top; 
+}
+
+.drop-links a{
+    text-decoration: none;
+    display: block;
+    font-style: italic;      
+    font-weight: 300;
+    text-transform: lowercase;
+    color:white;       
+    padding-bottom:.25em;
+    padding-left: 2em;
+}
+
+
+
+ /* ======================= */
+/* = navigation general =  */
+
+.navbar {
+    position: fixed;
+    top: 80px;
+}
+
+.nav-link-group {
+     /*position:realtive for drop-links-toggle-label anchor */
+    position:relative;      
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+    background-color: black;
+}
+
+.nav-link {
+    text-decoration: none;
+    display: block;
+    padding: 1em 1em 1em 1em;
+    letter-spacing: 1px; 
+    font-weight: 600;  
+}
+
+footer::before {
+    content: "";
+    width:100%;   
+    display: block;
+    border: 1px solid rgb(212, 212, 212);
+    margin-bottom: .5em;;
+}
+
+
+ /* ================= */
+/* = MEDIA QUERIES = */
+@media (min-width:800px) {
+
+       
+    .nav-menu {
+        position: relative;
+        transform: scale(1, 1);
+        width: 30vw;
+        border-right: 1px solid rgb(212, 212, 212);
+        padding-top: 50px;
+        background-color: white;
+    }  
+
+    .main-wrapper {
+        width: 70vw;
+        margin-left: auto;
+    }
+
+    .nav-menu a {
+        background-color: white;
+        color: black;
+        opacity: 1;
+        /* not setting to 1, will inherit 0 from mobile-first layout css:202 aka making everything black */
+    }
+
+    .nav-link-group{
+        border-bottom: 1px solid rgb(212, 212, 212);
+    }
+
+    .nav-link {
+        padding: .25em .5em .5em 1em;
+    }
+
+    .nav-menu a:hover {
+        background-color: black;
+        color: white;
+    }
+
+    .nav-toggle-label,
+    .drop-links-toggle-label {
+        display: none;
+    }
+
+    header{
+        margin-left:0;
+    }    
+
+    .drop-links .drop-link {
+        position: relative;
+        transform: scale(1, 1);
+    }       
+}
+
+@media (min-width:1100px) {
+
+    .nav-menu {
+        width:20vw;
+    }
+
+    .main-wrapper {
+        width: 80vw;
+    }
+
+    h1 {
+    font-size: var(--font-xlg);
+    font-weight: 800;
+}
+}
+
+
+
+/* to review
+inherit
+postions
+transition-transform-animation
+how opacity works
+
+tried apply flex-grow to children, but ended up with a reverse effect
+
+
+moral of the story:
+                    *navbar without JS won't work in fulll capacity 
+                    -> on scroll navbar won't close
+                    -> need to manually close navbar
+                    ->a good mark-up is halfway to success         
+
+
+                    What went well: mobile first (apart  from position chaos in the navigation at the beginning)
+                    typography
+                    mark-up refactoring
+ */
+ 
